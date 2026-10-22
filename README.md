@@ -22,6 +22,14 @@ the starting target and pass after Pisces applies a complete fix.
 ## Try the exercise
 
 From the repository root:
+```cmd
+pip install pisces-cli
+pisces init
+pisces watch .
+pisces scan .
+pisces explain <YOUR_FILE_NAME>:<LINE_NUMBER>
+pisces fix <YOUR_FILE_NAME>:<LINE_NUMBER>
+```
 
 ```powershell
 .venv\Scripts\python.exe -m pytest
