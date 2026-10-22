@@ -1,0 +1,14 @@
+# pisces project configuration
+# API keys MUST come from environment variables — never put them here.
+[llm]
+provider = "gemini"
+model    = "gemini-3.8-flash"
+[repair]
+max_attempts     = 4
+require_approval = true
+[validation]
+test_command = "pytest"
+[scan]
+exclude = [
+    ".git", ".venv", "venv", "__pycache__", "node_modules", ".pisces", "dist", "build"
+]

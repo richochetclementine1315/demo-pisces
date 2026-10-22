@@ -1,0 +1,27 @@
+{
+  "repair_id": "0433f138",
+  "state": "FAILED",
+  "finding": {
+    "id": "S002_COMMAND_INJECTION:pisces_target.py:15",
+    "rule": "S002_COMMAND_INJECTION",
+    "severity": "CRITICAL",
+    "file": "pisces_target.py",
+    "line": 15,
+    "code": "subprocess.run(f\"ls {user_input}\", shell=True)  # S002 \u2014 command injection",
+    "description": "Potential command injection via shell=True with dynamic input",
+    "impact": "Attacker-controlled input may execute arbitrary OS commands",
+    "remediation": "Use shell=False (default) and pass arguments as a list: subprocess.run(['cmd', arg], shell=False). Never pass unsanitised user input to shell commands."
+  },
+  "judge_result": {
+    "decision": "REJECTED",
+    "security_ok": false,
+    "functionality_ok": false,
+    "scope_ok": false,
+    "regression_risk": "MEDIUM",
+    "patch_quality": "POOR",
+    "completeness": "INCOMPLETE",
+    "reasoning": "The proposed patch is incomplete and does not fully address the issue. It still uses `subprocess.run` with a list of arguments, which is unnecessary and introduces complexity. The correct solution would be to simply remove the `shell=True` parameter, as the original code should have been. This patch also fails to preserve the intended functionality, as the test suite failed after applying the patch."
+  },
+  "human_approved": null,
+  "created_at": "2026-10-22T09:24:35.997232+00:00"
+}

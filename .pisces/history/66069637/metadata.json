@@ -1,0 +1,27 @@
+{
+  "repair_id": "66069637",
+  "state": "FAILED",
+  "finding": {
+    "id": "S002_COMMAND_INJECTION:pisces_target.py:37",
+    "rule": "S002_COMMAND_INJECTION",
+    "severity": "CRITICAL",
+    "file": "pisces_target.py",
+    "line": 37,
+    "code": "subprocess.run(",
+    "description": "Potential command injection via shell=True with dynamic input",
+    "impact": "Attacker-controlled input may execute arbitrary OS commands",
+    "remediation": "Use shell=False (default) and pass arguments as a list: subprocess.run(['cmd', arg], shell=False). Never pass unsanitised user input to shell commands."
+  },
+  "judge_result": {
+    "decision": "REJECTED",
+    "security_ok": true,
+    "functionality_ok": false,
+    "scope_ok": true,
+    "regression_risk": "HIGH",
+    "patch_quality": "ACCEPTABLE",
+    "completeness": "COMPLETE",
+    "reasoning": "The patch eliminates the command\u2011injection risk by removing\u202fshell=True\u202fand passing arguments as a list, which is a correct mitigation. However, it changes the observable behavior on platforms where\u202fecho\u202fis a shell"
+  },
+  "human_approved": null,
+  "created_at": "2026-10-20T20:36:41.567363+00:00"
+}

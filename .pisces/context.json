@@ -1,0 +1,239 @@
+{
+  "schema_version": "1",
+  "project": {
+    "root": "C:\\Users\\MRINMOY\\OneDrive\\Desktop\\demo-pisces",
+    "initialized_at": "2026-10-20T20:16:35.286606+00:00",
+    "last_updated": "2026-10-22T22:39:37.070845+00:00"
+  },
+  "files": {
+    "main.py": {
+      "path": "main.py",
+      "hash": "31b8cd15e43910ffef02c640133b5fbfcb1868c80313a692f1adf0ab14535c2e",
+      "functions": [
+        {
+          "name": "main",
+          "line_start": 1,
+          "line_end": 2,
+          "is_async": false,
+          "decorators": [],
+          "calls": [
+            "print"
+          ],
+          "args": [],
+          "docstring": null
+        }
+      ],
+      "classes": [],
+      "imports": [],
+      "calls": [
+        "print",
+        "main"
+      ],
+      "security_constructs": [],
+      "parse_error": null
+    },
+    "pisces_target.py": {
+      "path": "pisces_target.py",
+      "hash": "4d0f4bedd3f98e422e271b7fe8430f4e12ab004f098ae1b5c78f2e2042737653",
+      "functions": [
+        {
+          "name": "run_cmd",
+          "line_start": 15,
+          "line_end": 16,
+          "is_async": false,
+          "decorators": [],
+          "calls": [
+            "subprocess.run"
+          ],
+          "args": [
+            "user_input"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "load_data",
+          "line_start": 17,
+          "line_end": 18,
+          "is_async": false,
+          "decorators": [],
+          "calls": [
+            "pickle.load"
+          ],
+          "args": [
+            "f"
+          ],
+          "docstring": null
+        },
+        {
+          "name": "find_user",
+          "line_start": 28,
+          "line_end": 32,
+          "is_async": false,
+          "decorators": [],
+          "calls": [
+            "sqlite3.connect",
+            "fetchone",
+            "conn.execute"
+          ],
+          "args": [
+            "username"
+          ],
+          "docstring": null
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "module": "pickle",
+          "names": [
+            "pickle"
+          ],
+          "line": 7,
+          "is_from": false
+        },
+        {
+          "module": "sqlite3",
+          "names": [
+            "sqlite3"
+          ],
+          "line": 8,
+          "is_from": false
+        },
+        {
+          "module": "subprocess",
+          "names": [
+            "subprocess"
+          ],
+          "line": 9,
+          "is_from": false
+        },
+        {
+          "module": "requests",
+          "names": [
+            "requests"
+          ],
+          "line": 21,
+          "is_from": false
+        }
+      ],
+      "calls": [
+        "subprocess.run",
+        "pickle.load",
+        "requests.get",
+        "eval",
+        "input",
+        "sqlite3.connect",
+        "fetchone",
+        "conn.execute",
+        "print"
+      ],
+      "security_constructs": [
+        {
+          "kind": "hardcoded_secret_assignment",
+          "line": 11,
+          "code": "password = \"super_secret_123\"  # S001 \u2014 hardcoded secret",
+          "details": "Variable 'password' assigned a string literal"
+        },
+        {
+          "kind": "hardcoded_secret_assignment",
+          "line": 12,
+          "code": "api_key = \"sk-abc123xyz\"  # S001 \u2014 hardcoded secret",
+          "details": "Variable 'api_key' assigned a string literal"
+        },
+        {
+          "kind": "subprocess_call",
+          "line": 16,
+          "code": "subprocess.run(f\"ls {user_input}\", shell=True)  # S002 \u2014 command injection",
+          "details": ""
+        },
+        {
+          "kind": "pickle_load",
+          "line": 18,
+          "code": "return pickle.load(f)  # S004 \u2014 unsafe deserialization",
+          "details": ""
+        },
+        {
+          "kind": "requests_call",
+          "line": 23,
+          "code": "r = requests.get(\"https://api.example.com\", verify=False)  # S005 \u2014 TLS disabled",
+          "details": ""
+        },
+        {
+          "kind": "eval_call",
+          "line": 25,
+          "code": "result = eval(input(\"expr: \"))  # S006 \u2014 code injection",
+          "details": ""
+        }
+      ],
+      "parse_error": null
+    },
+    "tests\\test_pisces_target.py": {
+      "path": "tests\\test_pisces_target.py",
+      "hash": "38ac3d9349c77005053b3f587f29d86804cfb082e96a9fbd1e15d46a00ab0b50",
+      "functions": [
+        {
+          "name": "test_load_data_returns_pickled_value",
+          "line_start": 7,
+          "line_end": 16,
+          "is_async": false,
+          "decorators": [],
+          "calls": [
+            "io.BytesIO",
+            "pickle.dump",
+            "stream.seek",
+            "patch",
+            "importlib.import_module",
+            "target.load_data"
+          ],
+          "args": [],
+          "docstring": null
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "module": "importlib",
+          "names": [
+            "importlib"
+          ],
+          "line": 1,
+          "is_from": false
+        },
+        {
+          "module": "io",
+          "names": [
+            "io"
+          ],
+          "line": 2,
+          "is_from": false
+        },
+        {
+          "module": "pickle",
+          "names": [
+            "pickle"
+          ],
+          "line": 3,
+          "is_from": false
+        },
+        {
+          "module": "unittest.mock",
+          "names": [
+            "patch"
+          ],
+          "line": 4,
+          "is_from": true
+        }
+      ],
+      "calls": [
+        "io.BytesIO",
+        "pickle.dump",
+        "stream.seek",
+        "patch",
+        "importlib.import_module",
+        "target.load_data"
+      ],
+      "security_constructs": [],
+      "parse_error": null
+    }
+  }
+}

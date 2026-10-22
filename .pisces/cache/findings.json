@@ -1,0 +1,138 @@
+{
+  "findings": [
+    {
+      "id": "S001_HARDCODED_SECRET:pisces_target.py:11",
+      "rule": "S001_HARDCODED_SECRET",
+      "severity": "HIGH",
+      "file": "pisces_target.py",
+      "line": 11,
+      "code": "password = \"super_secret_123\"  # S001 \u2014 hardcoded secret",
+      "description": "Hardcoded secret or credential in source code",
+      "impact": "Credentials exposed in version control or logs",
+      "remediation": "Move secrets to environment variables. Use os.environ.get('MY_SECRET') or a secrets manager."
+    },
+    {
+      "id": "S001_HARDCODED_SECRET:pisces_target.py:12",
+      "rule": "S001_HARDCODED_SECRET",
+      "severity": "HIGH",
+      "file": "pisces_target.py",
+      "line": 12,
+      "code": "api_key = \"sk-abc123xyz\"  # S001 \u2014 hardcoded secret",
+      "description": "Hardcoded secret or credential in source code",
+      "impact": "Credentials exposed in version control or logs",
+      "remediation": "Move secrets to environment variables. Use os.environ.get('MY_SECRET') or a secrets manager."
+    },
+    {
+      "id": "S002_COMMAND_INJECTION:pisces_target.py:16",
+      "rule": "S002_COMMAND_INJECTION",
+      "severity": "CRITICAL",
+      "file": "pisces_target.py",
+      "line": 16,
+      "code": "subprocess.run(f\"ls {user_input}\", shell=True)  # S002 \u2014 command injection",
+      "description": "Potential command injection via shell=True with dynamic input",
+      "impact": "Attacker-controlled input may execute arbitrary OS commands",
+      "remediation": "Use shell=False (default) and pass arguments as a list: subprocess.run(['cmd', arg], shell=False). Never pass unsanitised user input to shell commands."
+    },
+    {
+      "id": "S004_UNSAFE_DESERIALIZATION:pisces_target.py:18",
+      "rule": "S004_UNSAFE_DESERIALIZATION",
+      "severity": "HIGH",
+      "file": "pisces_target.py",
+      "line": 18,
+      "code": "return pickle.load(f)  # S004 \u2014 unsafe deserialization",
+      "description": "Unsafe deserialization of untrusted data",
+      "impact": "Maliciously crafted data can execute arbitrary code during unpickling",
+      "remediation": "Never unpickle data from untrusted sources. Use JSON/msgpack for serialisation. For yaml.load, use yaml.safe_load(stream) instead."
+    },
+    {
+      "id": "S005_TLS_VERIFY_DISABLED:pisces_target.py:23",
+      "rule": "S005_TLS_VERIFY_DISABLED",
+      "severity": "MEDIUM",
+      "file": "pisces_target.py",
+      "line": 23,
+      "code": "r = requests.get(\"https://api.example.com\", verify=False)  # S005 \u2014 TLS disabled",
+      "description": "TLS certificate verification disabled (verify=False)",
+      "impact": "Disabling TLS verification allows man-in-the-middle attacks",
+      "remediation": "Remove verify=False. If using a self-signed cert, pass verify='/path/to/ca-bundle.crt' instead."
+    },
+    {
+      "id": "S006_CODE_INJECTION:pisces_target.py:25",
+      "rule": "S006_CODE_INJECTION",
+      "severity": "CRITICAL",
+      "file": "pisces_target.py",
+      "line": 25,
+      "code": "result = eval(input(\"expr: \"))  # S006 \u2014 code injection",
+      "description": "eval() or exec() called with non-literal (potentially dynamic) argument",
+      "impact": "Dynamic code execution \u2014 arbitrary Python can be injected and executed",
+      "remediation": "Avoid eval()/exec() entirely. Use ast.literal_eval() for safe constant parsing, or restructure logic to remove dynamic execution."
+    }
+  ],
+  "index": {
+    "pisces_target.py:11": {
+      "id": "S001_HARDCODED_SECRET:pisces_target.py:11",
+      "rule": "S001_HARDCODED_SECRET",
+      "severity": "HIGH",
+      "file": "pisces_target.py",
+      "line": 11,
+      "code": "password = \"super_secret_123\"  # S001 \u2014 hardcoded secret",
+      "description": "Hardcoded secret or credential in source code",
+      "impact": "Credentials exposed in version control or logs",
+      "remediation": "Move secrets to environment variables. Use os.environ.get('MY_SECRET') or a secrets manager."
+    },
+    "pisces_target.py:12": {
+      "id": "S001_HARDCODED_SECRET:pisces_target.py:12",
+      "rule": "S001_HARDCODED_SECRET",
+      "severity": "HIGH",
+      "file": "pisces_target.py",
+      "line": 12,
+      "code": "api_key = \"sk-abc123xyz\"  # S001 \u2014 hardcoded secret",
+      "description": "Hardcoded secret or credential in source code",
+      "impact": "Credentials exposed in version control or logs",
+      "remediation": "Move secrets to environment variables. Use os.environ.get('MY_SECRET') or a secrets manager."
+    },
+    "pisces_target.py:16": {
+      "id": "S002_COMMAND_INJECTION:pisces_target.py:16",
+      "rule": "S002_COMMAND_INJECTION",
+      "severity": "CRITICAL",
+      "file": "pisces_target.py",
+      "line": 16,
+      "code": "subprocess.run(f\"ls {user_input}\", shell=True)  # S002 \u2014 command injection",
+      "description": "Potential command injection via shell=True with dynamic input",
+      "impact": "Attacker-controlled input may execute arbitrary OS commands",
+      "remediation": "Use shell=False (default) and pass arguments as a list: subprocess.run(['cmd', arg], shell=False). Never pass unsanitised user input to shell commands."
+    },
+    "pisces_target.py:18": {
+      "id": "S004_UNSAFE_DESERIALIZATION:pisces_target.py:18",
+      "rule": "S004_UNSAFE_DESERIALIZATION",
+      "severity": "HIGH",
+      "file": "pisces_target.py",
+      "line": 18,
+      "code": "return pickle.load(f)  # S004 \u2014 unsafe deserialization",
+      "description": "Unsafe deserialization of untrusted data",
+      "impact": "Maliciously crafted data can execute arbitrary code during unpickling",
+      "remediation": "Never unpickle data from untrusted sources. Use JSON/msgpack for serialisation. For yaml.load, use yaml.safe_load(stream) instead."
+    },
+    "pisces_target.py:23": {
+      "id": "S005_TLS_VERIFY_DISABLED:pisces_target.py:23",
+      "rule": "S005_TLS_VERIFY_DISABLED",
+      "severity": "MEDIUM",
+      "file": "pisces_target.py",
+      "line": 23,
+      "code": "r = requests.get(\"https://api.example.com\", verify=False)  # S005 \u2014 TLS disabled",
+      "description": "TLS certificate verification disabled (verify=False)",
+      "impact": "Disabling TLS verification allows man-in-the-middle attacks",
+      "remediation": "Remove verify=False. If using a self-signed cert, pass verify='/path/to/ca-bundle.crt' instead."
+    },
+    "pisces_target.py:25": {
+      "id": "S006_CODE_INJECTION:pisces_target.py:25",
+      "rule": "S006_CODE_INJECTION",
+      "severity": "CRITICAL",
+      "file": "pisces_target.py",
+      "line": 25,
+      "code": "result = eval(input(\"expr: \"))  # S006 \u2014 code injection",
+      "description": "eval() or exec() called with non-literal (potentially dynamic) argument",
+      "impact": "Dynamic code execution \u2014 arbitrary Python can be injected and executed",
+      "remediation": "Avoid eval()/exec() entirely. Use ast.literal_eval() for safe constant parsing, or restructure logic to remove dynamic execution."
+    }
+  }
+}

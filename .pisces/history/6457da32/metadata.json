@@ -1,0 +1,27 @@
+{
+  "repair_id": "6457da32",
+  "state": "FAILED",
+  "finding": {
+    "id": "S001_HARDCODED_SECRET:pisces_target.py:15",
+    "rule": "S001_HARDCODED_SECRET",
+    "severity": "HIGH",
+    "file": "pisces_target.py",
+    "line": 15,
+    "code": "API_KEY = \"demo-secret-key-123456\"",
+    "description": "Hardcoded secret or credential in source code",
+    "impact": "Credentials exposed in version control or logs",
+    "remediation": "Move secrets to environment variables. Use os.environ.get('MY_SECRET') or a secrets manager."
+  },
+  "judge_result": {
+    "decision": "REJECTED",
+    "security_ok": false,
+    "functionality_ok": false,
+    "scope_ok": true,
+    "regression_risk": "HIGH",
+    "patch_quality": "POOR",
+    "completeness": "INCOMPLETE",
+    "reasoning": "The patch replaces the hard\u2011coded secret with a call to\u202fos.getenv\u202fbut fails to import the\u202fos\u202fmodule, causing a\u202fNameError\u202fat import time and breaking the application. Additionally, it provides no handling for a missing environment variable, which could result in undefined behavior or fallback to an insecure default. While the change is limited to the vulnerable line (good scope), the missing import and lack of robustness make the fix incomplete and introduce a high regression risk, so the patch must be rejected."
+  },
+  "human_approved": null,
+  "created_at": "2026-10-20T20:35:54.670723+00:00"
+}

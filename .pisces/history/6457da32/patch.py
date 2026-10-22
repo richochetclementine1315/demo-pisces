@@ -1,0 +1,1 @@
+API_KEY = os.getenv("API_KEY")  # Load API key from environment variable to avoid hardcoding

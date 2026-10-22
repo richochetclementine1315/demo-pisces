@@ -1,0 +1,27 @@
+{
+  "repair_id": "1abf6512",
+  "state": "SUCCEEDED",
+  "finding": {
+    "id": "S002_COMMAND_INJECTION:pisces_target.py:15",
+    "rule": "S002_COMMAND_INJECTION",
+    "severity": "CRITICAL",
+    "file": "pisces_target.py",
+    "line": 15,
+    "code": "subprocess.run(f\"ls {user_input}\", shell=True)  # S002 \u2014 command injection",
+    "description": "Potential command injection via shell=True with dynamic input",
+    "impact": "Attacker-controlled input may execute arbitrary OS commands",
+    "remediation": "Use shell=False (default) and pass arguments as a list: subprocess.run(['cmd', arg], shell=False). Never pass unsanitised user input to shell commands."
+  },
+  "judge_result": {
+    "decision": "APPROVED",
+    "security_ok": true,
+    "functionality_ok": true,
+    "scope_ok": true,
+    "regression_risk": "LOW",
+    "patch_quality": "GOOD",
+    "completeness": "COMPLETE",
+    "reasoning": "The patch eliminates the use of `shell=True` and replaces the formatted command string with a list argument to `subprocess.run`, thereby preventing command injection while preserving the intended functionality of listing a directory. It modifies only the vulnerable line, introduces no new behavior, and carries minimal regression risk. The fix is complete and well\u2011implemented."
+  },
+  "human_approved": true,
+  "created_at": "2026-10-20T21:18:55.738221+00:00"
+}
