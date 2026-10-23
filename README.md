@@ -44,3 +44,6 @@ Review each proposed change before accepting it. Then rerun the tests:
 
 The fake API key is included only to exercise secret detection; replace it
 with an environment-based configuration or remove it during repair.
+
+* **THE ACTUAL PISCES REPOSITORY:** [GitHub Repository](https://github.com/richochetclementine1315/Pisces/)
+* **THE OFFICIAL PYPI LINK:** [pisces-cli on PyPI](https://pypi.org/project/pisces-cli/)
